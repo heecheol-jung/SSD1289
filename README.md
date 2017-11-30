@@ -22,6 +22,9 @@ SSD1289 LCD module example
 ***1.2.5. System Workbench for STM32***
 - v2.3
 
+***1.2.6. STM32 CubeMX***
+- 4.23.0
+
 **1.3. Development Board**
 
 ***1.3.1. Waveshare Open 407Z***
