@@ -93,5 +93,39 @@ namespace SSD1289_Ctrl_App.SSD1289
 
             return regValues;
         }
+
+        public static List<RegisterValuePair> CreateBackgroudWithColor(ushort color)
+        {
+            List<RegisterValuePair> regValues = new List<RegisterValuePair>();
+            string reg;
+            string regValue;
+
+            // x coordinate.
+            reg = string.Format("{0:x4}", 0x004E);
+            regValue = string.Format("{0:x4}", 0);
+            regValues.Add(new RegisterValuePair() { register = reg, registerValue = regValue });
+
+            // y coordinate.
+            reg = string.Format("{0:x4}", 0x004F);
+            regValue = string.Format("{0:x4}", 0);
+            regValues.Add(new RegisterValuePair() { register = reg, registerValue = regValue });
+
+            for (int i = 0; i < 240; i++)
+            {
+                for (int j = 0; j < 320; j++)
+                {
+                    // Color.
+                    reg = string.Format("{0:x4}", 0x0022);
+                    regValue = string.Format("{0:x4}", color);
+                    regValues.Add(new RegisterValuePair() { register = reg, registerValue = regValue });
+
+                    reg = "sleep";
+                    regValue = "10";
+                    regValues.Add(new RegisterValuePair() { register = reg, registerValue = regValue });
+                }
+            }
+
+            return regValues;
+        }
     }
 }

@@ -21,6 +21,8 @@ namespace SSD1289_Ctrl_App
         bool _isWriteStarted = false;
         List<string> _registerWriteHistory = new List<string>();
         object _lock1 = new object();
+        ushort[] _colors = new ushort[] { 0xFFFF, 0x001F, 0xF800, 0x07E0 };
+        byte _colorIndex = 0;
         #endregion
 
         #region Constructors
@@ -284,6 +286,9 @@ namespace SSD1289_Ctrl_App
         // The window is about to be closed.
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
+            _loopWriteRegisters = false;
+
+            Thread.Sleep(100);
             SerialClose();
 
             timerGeneral.Enabled = false;
@@ -348,7 +353,7 @@ namespace SSD1289_Ctrl_App
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            openFileDialog1.InitialDirectory = "c:\\";
+            //openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
@@ -376,6 +381,7 @@ namespace SSD1289_Ctrl_App
                     _loopWriteRegisters = true;
 
                     await DoBatchWrite();
+                    _rvPairs.Clear();
                 }
                 else
                 {
@@ -394,14 +400,20 @@ namespace SSD1289_Ctrl_App
             UpdateUiWhileManyRegsWriting(false);
 
             // Register values for a diagonal line.
-            _rvPairs = Ssd1289Util.CreateLineWithBlack();
+            //_rvPairs = Ssd1289Util.CreateLineWithBlack();
 
             // Register values for clearing the LCD with white color.
             // (It will take long time(a minute or so).
             //_rvPairs = Ssd1289Util.CreateBackgroudWithWhite();
+            _rvPairs = Ssd1289Util.CreateBackgroudWithColor(_colors[_colorIndex++]);
+            if (_colorIndex >= _colors.Length)
+            {
+                _colorIndex = 0;
+            }
             _loopWriteRegisters = true;
 
             await DoBatchWrite();
+            _rvPairs.Clear();
 
             btnDrawLine.Enabled = true;
             UpdateUiWhileManyRegsWriting(true);
@@ -434,6 +446,11 @@ namespace SSD1289_Ctrl_App
                 }
                 lbBatchWriteHistory.EndUpdate();
             }
+        }
+
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+            _loopWriteRegisters = false;
         }
         #endregion
     }
