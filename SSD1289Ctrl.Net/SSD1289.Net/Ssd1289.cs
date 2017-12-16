@@ -156,8 +156,8 @@ namespace SSD1289.Net
         [BitFieldInfo(9, 2)]
         public bool VLE { get; set; }
 
-        [BitFieldInfo(11, )]
-        public bool PT { get; set; }
+        //[BitFieldInfo(11, )]
+        //public bool PT { get; set; }
     }
 
     /// <summary>

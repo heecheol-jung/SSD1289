@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Ssd1289.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SSD1289BitField.cs" />
+    <Compile Include="SSD1289Register.cs" />
     <Compile Include="Support\BitFieldAttributes.cs" />
     <Compile Include="Support\BitFieldExtensions.cs" />
   </ItemGroup>

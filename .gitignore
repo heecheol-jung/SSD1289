@@ -22,3 +22,5 @@
 /SSD1289Ctrl.Net/SSD1289.Net/obj
 /SSD1289Ctrl.Net/SSD1289.NetUnitTest/obj
 /SSD1289Ctrl.Net/SSD1289.NetUnitTest/bin
+*.suo
+/BitFieldImplementation_src/BitFieldImplementation/.vs/BitFieldImplementation/v15/Server/sqlite3

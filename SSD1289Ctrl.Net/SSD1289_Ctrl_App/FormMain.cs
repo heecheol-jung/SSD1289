@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.Threading;
 using SSD1289_Ctrl_App.SSD1289;
+using SSD1289.Net;
+using SSD1289_Ctrl_App.AppForm;
 
 namespace SSD1289_Ctrl_App
 {
@@ -23,6 +25,7 @@ namespace SSD1289_Ctrl_App
         object _lock1 = new object();
         ushort[] _colors = new ushort[] { 0xFFFF, 0x001F, 0xF800, 0x07E0 };
         byte _colorIndex = 0;
+        List<SSD1289Register> _registerTemplates = null;
         #endregion
 
         #region Constructors
@@ -281,6 +284,8 @@ namespace SSD1289_Ctrl_App
             UpdateControls();
 
             timerGeneral.Enabled = true;
+
+            _registerTemplates = AppUtil.LoadRegister<SSD1289Register>("ssd1289.json");
         }
 
         // The window is about to be closed.
@@ -377,7 +382,7 @@ namespace SSD1289_Ctrl_App
                 // ssd1289_init_reg_value.txt : SSD1289 initialization register values.
                 if (!string.IsNullOrEmpty(tbBatchWriteFileName.Text))
                 {
-                    _rvPairs = Ssd1289Util.LoadRegisterValue(tbBatchWriteFileName.Text);
+                    _rvPairs = AppUtil.LoadRegisterValue(tbBatchWriteFileName.Text);
                     _loopWriteRegisters = true;
 
                     await DoBatchWrite();
@@ -405,7 +410,7 @@ namespace SSD1289_Ctrl_App
             // Register values for clearing the LCD with white color.
             // (It will take long time(a minute or so).
             //_rvPairs = Ssd1289Util.CreateBackgroudWithWhite();
-            _rvPairs = Ssd1289Util.CreateBackgroudWithColor(_colors[_colorIndex++]);
+            _rvPairs = AppUtil.CreateBackgroudWithColor(_colors[_colorIndex++]);
             if (_colorIndex >= _colors.Length)
             {
                 _colorIndex = 0;
@@ -453,5 +458,11 @@ namespace SSD1289_Ctrl_App
             _loopWriteRegisters = false;
         }
         #endregion
+
+        private void BtnValueCalc_Click(object sender, EventArgs e)
+        {
+            FormValueCalc frmValueCalc = new FormValueCalc();
+            frmValueCalc.ShowDialog();
+        }
     }
 }
