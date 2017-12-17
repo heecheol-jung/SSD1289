@@ -47,9 +47,7 @@
     <Compile Include="Support\BitFieldAttributes.cs" />
     <Compile Include="Support\BitFieldExtensions.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Register\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Readme.txt" />
   </ItemGroup>

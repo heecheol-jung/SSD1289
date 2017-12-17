@@ -103,7 +103,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.88991F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.11009F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
             this.tableLayoutPanel1.Controls.Add(this.lblReadReg, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblReadRegValue, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbReadRegAddr, 2, 0);
@@ -124,7 +124,7 @@
             this.lblReadReg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblReadReg.Location = new System.Drawing.Point(3, 0);
             this.lblReadReg.Name = "lblReadReg";
-            this.lblReadReg.Size = new System.Drawing.Size(60, 24);
+            this.lblReadReg.Size = new System.Drawing.Size(59, 24);
             this.lblReadReg.TabIndex = 0;
             this.lblReadReg.Text = "Register";
             this.lblReadReg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -135,21 +135,21 @@
             this.lblReadRegValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblReadRegValue.Location = new System.Drawing.Point(3, 24);
             this.lblReadRegValue.Name = "lblReadRegValue";
-            this.lblReadRegValue.Size = new System.Drawing.Size(60, 24);
+            this.lblReadRegValue.Size = new System.Drawing.Size(59, 24);
             this.lblReadRegValue.TabIndex = 1;
             this.lblReadRegValue.Text = "Value";
             this.lblReadRegValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbReadRegAddr
             // 
-            this.tbReadRegAddr.Location = new System.Drawing.Point(100, 3);
+            this.tbReadRegAddr.Location = new System.Drawing.Point(99, 3);
             this.tbReadRegAddr.Name = "tbReadRegAddr";
             this.tbReadRegAddr.Size = new System.Drawing.Size(100, 20);
             this.tbReadRegAddr.TabIndex = 2;
             // 
             // tbReadRegValue
             // 
-            this.tbReadRegValue.Location = new System.Drawing.Point(100, 27);
+            this.tbReadRegValue.Location = new System.Drawing.Point(99, 27);
             this.tbReadRegValue.Name = "tbReadRegValue";
             this.tbReadRegValue.ReadOnly = true;
             this.tbReadRegValue.Size = new System.Drawing.Size(100, 20);
@@ -159,7 +159,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(69, 0);
+            this.label1.Location = new System.Drawing.Point(68, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(25, 24);
             this.label1.TabIndex = 4;
@@ -170,7 +170,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(69, 24);
+            this.label2.Location = new System.Drawing.Point(68, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(25, 24);
             this.label2.TabIndex = 5;
@@ -214,7 +214,7 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.09346F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.90654F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 148F));
             this.tableLayoutPanel2.Controls.Add(this.lblWriteReg, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblWriteRegValue, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.tbWriteRegAddr, 2, 0);
@@ -253,14 +253,14 @@
             // 
             // tbWriteRegAddr
             // 
-            this.tbWriteRegAddr.Location = new System.Drawing.Point(99, 3);
+            this.tbWriteRegAddr.Location = new System.Drawing.Point(98, 3);
             this.tbWriteRegAddr.Name = "tbWriteRegAddr";
             this.tbWriteRegAddr.Size = new System.Drawing.Size(100, 20);
             this.tbWriteRegAddr.TabIndex = 2;
             // 
             // tbWriteRegValue
             // 
-            this.tbWriteRegValue.Location = new System.Drawing.Point(99, 27);
+            this.tbWriteRegValue.Location = new System.Drawing.Point(98, 27);
             this.tbWriteRegValue.Name = "tbWriteRegValue";
             this.tbWriteRegValue.Size = new System.Drawing.Size(100, 20);
             this.tbWriteRegValue.TabIndex = 3;
@@ -271,7 +271,7 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Location = new System.Drawing.Point(70, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 24);
+            this.label3.Size = new System.Drawing.Size(22, 24);
             this.label3.TabIndex = 4;
             this.label3.Text = "0x";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -282,7 +282,7 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Location = new System.Drawing.Point(70, 24);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 24);
+            this.label4.Size = new System.Drawing.Size(22, 24);
             this.label4.TabIndex = 5;
             this.label4.Text = "0x";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

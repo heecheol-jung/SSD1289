@@ -166,6 +166,7 @@
             this.btnManualInput.TabIndex = 12;
             this.btnManualInput.Text = "Manual Input";
             this.btnManualInput.UseVisualStyleBackColor = true;
+            this.btnManualInput.Click += new System.EventHandler(this.BtnManualInput_Click);
             // 
             // gbBitField
             // 

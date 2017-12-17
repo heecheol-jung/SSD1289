@@ -457,12 +457,38 @@ namespace SSD1289_Ctrl_App
         {
             _loopWriteRegisters = false;
         }
-        #endregion
 
         private void BtnValueCalc_Click(object sender, EventArgs e)
         {
-            FormValueCalc frmValueCalc = new FormValueCalc();
-            frmValueCalc.ShowDialog();
+            FormValueCalc frmValueCalc = null;
+
+            if (string.IsNullOrEmpty(tbWriteRegAddr.Text))
+            {
+                frmValueCalc = new FormValueCalc();
+            }
+            else
+            {
+                if (UInt32.TryParse(tbWriteRegAddr.Text, NumberStyles.HexNumber, null, out UInt32 addr))
+                {
+                    frmValueCalc = new FormValueCalc(addr);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid address.");
+                    return;
+                }
+            }
+             
+            if (frmValueCalc.ShowDialog() == DialogResult.OK)
+            {
+                if ((string.IsNullOrEmpty(tbWriteRegAddr.Text)) &&
+                    (frmValueCalc.HasAddress))
+                {
+                    tbWriteRegAddr.Text = string.Format($"{frmValueCalc.RegisterAddress:X2}");
+                }
+                tbWriteRegValue.Text = string.Format($"{frmValueCalc.RegisterValue:X4}");
+            }
         }
+        #endregion
     }
 }

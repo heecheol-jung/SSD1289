@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SSD1289.Net;
 using SSD1289_Ctrl_App.AppForm;
@@ -15,9 +9,16 @@ namespace SSD1289_Ctrl_App.AppCtrl
 {
     public partial class UcRegisterValue : UserControl
     {
+        #region Private Data
         private List<SSD1289Register> _registerTemplates = null;
         private List<SSD1289BitField> _bitFields = new List<SSD1289BitField>();
+        private BindingSource _bitFieldBindingSource = new BindingSource();
+        private UInt32 _registerAddress;
+        private UInt32 _registerValue = 0;
+        private bool _addressSet = false;
+        #endregion Private Data
 
+        #region Public Properties
         public List<SSD1289Register> RegisterTemplates
         {
             set
@@ -27,27 +28,72 @@ namespace SSD1289_Ctrl_App.AppCtrl
                     _registerTemplates = value;
                     cmbAddress.DataSource = _registerTemplates;
                     cmbAddress.DisplayMember = "Address";
+
+                    DisableAddressSelectoin();
                 }
             }
         }
-        public UInt32 RegisterAddress { get; set; }
-        public UInt32 RegisterValue { get; set; }
+        public UInt32 RegisterAddress
+        {
+            get
+            {
+                if (cmbAddress.SelectedIndex >= 0)
+                {
+                    return ((SSD1289Register)cmbAddress.SelectedItem).Address;
+                }
+                else
+                {
+                    throw new Exception("No register selected.");
+                }
+            }
 
+            set
+            {
+                _registerAddress = value;
+                _addressSet = true;
+                DisableAddressSelectoin();
+            }
+        }
+        public UInt32 RegisterValue
+        {
+            get
+            {
+                return _registerValue;
+            }
+            set
+            {
+                _registerValue = value;
+            }
+        }
+        public bool HasValue
+        {
+            get
+            {
+                if (_bitFields?.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool HadAddress
+        {
+            get => (cmbAddress.SelectedIndex >= 0) ? true : false;
+        }
+        #endregion Public Properties
+
+        #region Constructors
         public UcRegisterValue()
         {
             InitializeComponent();
         }
+        #endregion Constructors
 
-        private void CmbAddress_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbAddress.SelectedIndex < 0)
-            {
-                return;
-            }
-
-            UpdateRegisterTemplateInfo();
-        }
-
+        #region Private Methods
         private void UpdateRegisterTemplateInfo()
         {
             SSD1289Register regTemplate = (SSD1289Register)cmbAddress.SelectedItem;
@@ -62,11 +108,47 @@ namespace SSD1289_Ctrl_App.AppCtrl
                 tbValue.Text = string.Format($"{regTemplate.Value:X4}");
             }
 
-            // 아래 코드는 row선택시 인덱스관련 예외 발생.
-            // dgvBitField.DataSource = _bitFields;
-            dgvBitField.DataSource = _bitFields.ToArray();
+            if (_bitFieldBindingSource.DataSource == null)
+            {
+                _bitFieldBindingSource.DataSource = _bitFields;
+            }
+            _bitFieldBindingSource.Clear();
+
+            if (dgvBitField.DataSource == null)
+            {
+                dgvBitField.DataSource = _bitFieldBindingSource;
+            }
+            
         }
 
+        private void DisableAddressSelectoin()
+        {
+            if (_addressSet == true && cmbAddress.Items.Count > 0)
+            {
+                foreach (SSD1289Register item in cmbAddress.Items)
+                {
+                    if (item.Address == _registerAddress)
+                    {
+                        cmbAddress.SelectedItem = item;
+                        cmbAddress.Enabled = false;
+                        break;
+                    }
+                }
+            }
+        }
+        #endregion Private Methods
+
+        #region Event Handlers
+        private void CmbAddress_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbAddress.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            UpdateRegisterTemplateInfo();
+        }
+        
         private void BtnAddBitField_Click(object sender, EventArgs e)
         {
             SSD1289Register regTemplate = (SSD1289Register)cmbAddress.SelectedItem;
@@ -83,11 +165,10 @@ namespace SSD1289_Ctrl_App.AppCtrl
                 frmBfValue = new FormBitFieldValue(bitFields);
                 if (frmBfValue.ShowDialog() == DialogResult.OK)
                 {
-                    _bitFields.Add(frmBfValue.BitField);
-                    dgvBitField.DataSource = null;
-                    dgvBitField.DataSource = _bitFields.ToArray();
+                    _bitFieldBindingSource.Add(frmBfValue.BitField);
 
-                    tbValue.Text = string.Format($"{SSD1289BitField.CalculateValueFromBitFields(_bitFields):X4}");
+                    _registerValue = SSD1289BitField.CalculateValueFromBitFields(_bitFields);
+                    tbValue.Text = string.Format($"{_registerValue:X4}");
                 }
             } while (frmBfValue.Continue);
         }
@@ -113,9 +194,10 @@ namespace SSD1289_Ctrl_App.AppCtrl
                     if (bitField.Value != frmBfValue.BitField.Value)
                     {
                         bitField.Value = frmBfValue.BitField.Value;
-                        dgvBitField.Refresh();
+                        _bitFieldBindingSource.ResetCurrentItem();
 
-                        tbValue.Text = string.Format($"{SSD1289BitField.CalculateValueFromBitFields(_bitFields):X4}");
+                        _registerValue = SSD1289BitField.CalculateValueFromBitFields(_bitFields);
+                        tbValue.Text = string.Format($"{_registerValue:X4}");
                     }
                 }
             }
@@ -137,21 +219,42 @@ namespace SSD1289_Ctrl_App.AppCtrl
                 bitField = (SSD1289BitField)dgvBitField.SelectedRows[0].DataBoundItem;
             }
 
-            // DataSource를 array로 한상태에서 dgvBitField.Rows.RemoveAt(selectedIdx)명령은 예외 발생.
-            // dgvBitField.DataSource = _bitFields.ToArray();
-            // System.InvalidOperationException: Rows cannot be programmatically removed unless the DataGridView is data-bound to an IBindingList that supports change notification and allows deletion.
-            dgvBitField.Rows.RemoveAt(selectedIdx);
-            _bitFields.Remove(bitField);
-            dgvBitField.Refresh();
+            _bitFieldBindingSource.RemoveAt(selectedIdx);
         }
 
         private void DgvBitField_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvBitField.Columns[e.ColumnIndex].Name == "Value")
+            if (_bitFields.Count > 0)
             {
-                SSD1289BitField bitField = (SSD1289BitField)dgvBitField.Rows[e.RowIndex].DataBoundItem;
-                e.Value = bitField.GetStringValueInHex();
+                if (dgvBitField.Columns[e.ColumnIndex].DataPropertyName == "Value")
+                {
+                    SSD1289BitField bitField = (SSD1289BitField)dgvBitField.Rows[e.RowIndex].DataBoundItem;
+                    e.Value = bitField.GetStringValueInHex();
+                }
             }
         }
+
+        private void BtnManualInput_Click(object sender, EventArgs e)
+        {
+            _bitFieldBindingSource.Clear();
+
+            FormManualRegValue frmValue = new FormManualRegValue();
+            if (frmValue.ShowDialog() == DialogResult.OK)
+            {
+                List<SSD1289BitField> bitFields = SSD1289BitField.CreateBitFieldsFromValue((SSD1289Register)cmbAddress.SelectedItem, frmValue.RegisterValue);
+                if (bitFields?.Count > 0)
+                {
+                    foreach (SSD1289BitField item in bitFields)
+                    {
+                        _bitFieldBindingSource.Add(item);
+                    }
+
+                    _registerValue = SSD1289BitField.CalculateValueFromBitFields(_bitFields);
+                    tbValue.Text = string.Format($"{_registerValue:X4}");
+                }
+            }
+            
+        }
+        #endregion Event Handlers
     }
 }
