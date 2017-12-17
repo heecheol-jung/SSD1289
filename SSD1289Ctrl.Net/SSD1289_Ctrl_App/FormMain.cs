@@ -57,6 +57,8 @@ namespace SSD1289_Ctrl_App
             btnWriteReg.Enabled = enableControls;
             btnBatchWriteStartStop.Enabled = enableControls;
             btnDrawLine.Enabled = enableControls;
+            btnValueCalc.Enabled = enableControls;
+            cmbJob.Enabled = enableControls;
         }
 
         private void UpdateControlsWhileRegReading()
@@ -280,12 +282,23 @@ namespace SSD1289_Ctrl_App
                 cmbSerialPort.Items.AddRange(portNames);
                 cmbSerialPort.SelectedIndex = 0;
             }
+
+            PopulateJobs();
             
             UpdateControls();
 
             timerGeneral.Enabled = true;
 
             _registerTemplates = AppUtil.LoadRegister<SSD1289Register>("ssd1289.json");
+        }
+
+        private void PopulateJobs()
+        {
+            cmbJob.Items.Add(AppJob.BatchWrite);
+            cmbJob.Items.Add(AppJob.FillWhite);
+            cmbJob.Items.Add(AppJob.Line);
+            cmbJob.Items.Add(AppJob.MarkCorner);
+            cmbJob.Items.Add(AppJob.Character);
         }
 
         // The window is about to be closed.
@@ -379,23 +392,67 @@ namespace SSD1289_Ctrl_App
 
             if (_serial.IsOpen == true)
             {
-                // ssd1289_init_reg_value.txt : SSD1289 initialization register values.
-                if (!string.IsNullOrEmpty(tbBatchWriteFileName.Text))
+                if (PrepareBatchWriteData())
                 {
-                    _rvPairs = AppUtil.LoadRegisterValue(tbBatchWriteFileName.Text);
                     _loopWriteRegisters = true;
-
                     await DoBatchWrite();
                     _rvPairs.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("Select register value file name.");
                 }
             }
 
             btnBatchWriteStartStop.Enabled = true;
             UpdateUiWhileManyRegsWriting(true);
+        }
+
+        private bool PrepareBatchWriteData()
+        {
+            if (cmbJob.SelectedIndex < 0)
+            {
+                MessageBox.Show("No job selected.");
+                return false;
+            }
+
+            switch ((AppJob)cmbJob.SelectedItem)
+            {
+                case AppJob.BatchWrite:
+                    // ssd1289_init_reg_value.txt : SSD1289 initialization register values.
+                    if (!string.IsNullOrEmpty(tbBatchWriteFileName.Text))
+                    {
+                        _rvPairs = AppUtil.LoadRegisterValue(tbBatchWriteFileName.Text);
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Select register value file name.");
+                    }
+                    break;
+
+                case AppJob.FillWhite:
+                    _rvPairs = AppUtil.CreateBackgroudWithColor(AppConstant.COLOR_WHITE);
+                    return true;
+                    break;
+
+                case AppJob.Line:
+                    _rvPairs = AppUtil.CreateLineWithBlack();
+                    return true;
+                    break;
+
+                case AppJob.MarkCorner:
+                    _rvPairs = AppUtil.CreateCornerPixels();
+                    return true;
+                    break;
+
+                case AppJob.Character:
+                    _rvPairs = AppUtil.CreateAscii();
+                    return true;
+                    break;
+
+                default:
+                    MessageBox.Show("Invalid job.");
+                    break;
+            }
+            
+            return false;
         }
 
         // DrawLine button clicked.

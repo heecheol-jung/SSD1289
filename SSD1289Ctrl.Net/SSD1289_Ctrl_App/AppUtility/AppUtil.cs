@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SSD1289.Net;
+using SSD1289_Ctrl_App.AppUtility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,21 @@ namespace SSD1289_Ctrl_App.SSD1289
     {
         public string register;
         public string registerValue;
+    }
+
+    enum AppJob
+    {
+        Unknown,
+
+        BatchWrite,
+
+        Line,
+
+        FillWhite,
+
+        MarkCorner,
+
+        Character
     }
 
     class AppUtil
@@ -123,9 +139,9 @@ namespace SSD1289_Ctrl_App.SSD1289
                     regValue = string.Format("{0:x4}", color);
                     regValues.Add(new RegisterValuePair() { register = reg, registerValue = regValue });
 
-                    reg = "sleep";
-                    regValue = "10";
-                    regValues.Add(new RegisterValuePair() { register = reg, registerValue = regValue });
+                    //reg = "sleep";
+                    //regValue = "10";
+                    //regValues.Add(new RegisterValuePair() { register = reg, registerValue = regValue });
                 }
             }
 
@@ -181,6 +197,70 @@ namespace SSD1289_Ctrl_App.SSD1289
             }
 
             return uniqueBitFields;
+        }
+
+        internal static List<RegisterValuePair> CreateCornerPixels()
+        {
+            List<RegisterValuePair> regValues = new List<RegisterValuePair>();
+
+            // (0, 0), black
+            AddPixel(regValues, 1, 1, AppConstant.COLOR_BLACK);
+
+            // (239, 0), red
+            AddPixel(regValues, 238, 1, AppConstant.COLOR_RED);
+
+            // (239, 319), blue
+            AddPixel(regValues, 238, 318, AppConstant.COLOR_BLUE);
+
+            // (0, 319), green
+            AddPixel(regValues, 1, 318, AppConstant.COLOR_GREEN);
+
+            return regValues;
+        }
+
+        internal static void AddPixel(List<RegisterValuePair> data, UInt32 x, UInt32 y, ushort color)
+        {
+            string reg;
+            string regValue;
+
+            // x coordinate.
+            reg = string.Format("{0:x4}", 0x004E);
+            regValue = string.Format("{0:x4}", x);
+            data.Add(new RegisterValuePair() { register = reg, registerValue = regValue });
+
+            // y coordinate.
+            reg = string.Format("{0:x4}", 0x004F);
+            regValue = string.Format("{0:x4}", y);
+            data.Add(new RegisterValuePair() { register = reg, registerValue = regValue });
+
+            // Color.
+            reg = string.Format("{0:x4}", 0x0022);
+            regValue = string.Format("{0:x4}", color);
+            data.Add(new RegisterValuePair() { register = reg, registerValue = regValue });
+        }
+
+        internal static List<RegisterValuePair> CreateAscii()
+        {
+            byte[,] ascii = AppFont.MsGothicAscii;
+            List<RegisterValuePair> asciiData = new List<RegisterValuePair>();
+
+            for (int i = 0; i < 16; i++)
+            {
+                byte line = ascii[33, i];
+                for (int ii = 0; ii < 8; ii++)
+                {
+                    if (((line >> (7 - ii)) & 0x01) == 0x01)
+                    {
+                        AddPixel(asciiData, (UInt32)(10 + ii), (UInt32)(10 + i), AppConstant.COLOR_BLACK);
+                    }
+                    else
+                    {
+                        AddPixel(asciiData, (UInt32)(10 + ii), (UInt32)(10 + i), AppConstant.COLOR_GREEN);
+                    }
+                }
+            }
+
+            return asciiData;
         }
     }
 }

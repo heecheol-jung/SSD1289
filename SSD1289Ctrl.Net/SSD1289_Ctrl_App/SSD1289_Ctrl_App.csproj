@@ -73,6 +73,7 @@
     <Compile Include="AppForm\FormValueCalc.Designer.cs">
       <DependentUpon>FormValueCalc.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppUtility\AppFont.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
