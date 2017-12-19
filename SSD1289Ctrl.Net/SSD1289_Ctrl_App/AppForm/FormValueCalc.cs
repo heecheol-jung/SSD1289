@@ -9,6 +9,7 @@ namespace SSD1289_Ctrl_App.AppForm
     public partial class FormValueCalc : Form
     {
         private UInt32? _address;
+        private UInt32? _value;
         
         public UInt32 RegisterAddress
         {
@@ -36,6 +37,13 @@ namespace SSD1289_Ctrl_App.AppForm
             _address = address;
         }
 
+        public FormValueCalc(UInt32 address, UInt32 value)
+        {
+            InitializeComponent();
+            _address = address;
+            _value = value;
+        }
+
         private void FormValueCalc_Load(object sender, EventArgs e)
         {
             List<SSD1289Register> regTemplates = AppUtil.LoadRegister<SSD1289Register>("ssd1289.json");
@@ -48,6 +56,11 @@ namespace SSD1289_Ctrl_App.AppForm
             else
             {
                 ucRegValue.RegisterTemplates = regTemplates;
+            }
+
+            if (_value.HasValue)
+            {
+                ucRegValue.RegisterValue = _value.Value;
             }
         }
 

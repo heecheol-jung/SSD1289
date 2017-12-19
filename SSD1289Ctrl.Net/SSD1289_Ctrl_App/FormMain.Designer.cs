@@ -50,8 +50,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbJob = new System.Windows.Forms.ComboBox();
             this.btnStop = new System.Windows.Forms.Button();
-            this.btnDrawLine = new System.Windows.Forms.Button();
             this.btnBatchWriteClear = new System.Windows.Forms.Button();
             this.btnBatchWriteStartStop = new System.Windows.Forms.Button();
             this.lbBatchWriteHistory = new System.Windows.Forms.ListBox();
@@ -60,7 +60,6 @@
             this.timerGeneral = new System.Windows.Forms.Timer(this.components);
             this.lblSerialPort = new System.Windows.Forms.Label();
             this.cmbSerialPort = new System.Windows.Forms.ComboBox();
-            this.cmbJob = new System.Windows.Forms.ComboBox();
             this.gbRegRead.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbRegWrite.SuspendLayout();
@@ -104,7 +103,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.88991F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.11009F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 148F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.Controls.Add(this.lblReadReg, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblReadRegValue, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbReadRegAddr, 2, 0);
@@ -125,7 +124,7 @@
             this.lblReadReg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblReadReg.Location = new System.Drawing.Point(3, 0);
             this.lblReadReg.Name = "lblReadReg";
-            this.lblReadReg.Size = new System.Drawing.Size(59, 24);
+            this.lblReadReg.Size = new System.Drawing.Size(57, 24);
             this.lblReadReg.TabIndex = 0;
             this.lblReadReg.Text = "Register";
             this.lblReadReg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -136,21 +135,21 @@
             this.lblReadRegValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblReadRegValue.Location = new System.Drawing.Point(3, 24);
             this.lblReadRegValue.Name = "lblReadRegValue";
-            this.lblReadRegValue.Size = new System.Drawing.Size(59, 24);
+            this.lblReadRegValue.Size = new System.Drawing.Size(57, 24);
             this.lblReadRegValue.TabIndex = 1;
             this.lblReadRegValue.Text = "Value";
             this.lblReadRegValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbReadRegAddr
             // 
-            this.tbReadRegAddr.Location = new System.Drawing.Point(98, 3);
+            this.tbReadRegAddr.Location = new System.Drawing.Point(96, 3);
             this.tbReadRegAddr.Name = "tbReadRegAddr";
             this.tbReadRegAddr.Size = new System.Drawing.Size(100, 20);
             this.tbReadRegAddr.TabIndex = 2;
             // 
             // tbReadRegValue
             // 
-            this.tbReadRegValue.Location = new System.Drawing.Point(98, 27);
+            this.tbReadRegValue.Location = new System.Drawing.Point(96, 27);
             this.tbReadRegValue.Name = "tbReadRegValue";
             this.tbReadRegValue.ReadOnly = true;
             this.tbReadRegValue.Size = new System.Drawing.Size(100, 20);
@@ -160,7 +159,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(68, 0);
+            this.label1.Location = new System.Drawing.Point(66, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(24, 24);
             this.label1.TabIndex = 4;
@@ -171,7 +170,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(68, 24);
+            this.label2.Location = new System.Drawing.Point(66, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(24, 24);
             this.label2.TabIndex = 5;
@@ -215,7 +214,7 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.09346F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.90654F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 149F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 151F));
             this.tableLayoutPanel2.Controls.Add(this.lblWriteReg, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblWriteRegValue, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.tbWriteRegAddr, 2, 0);
@@ -236,7 +235,7 @@
             this.lblWriteReg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblWriteReg.Location = new System.Drawing.Point(3, 0);
             this.lblWriteReg.Name = "lblWriteReg";
-            this.lblWriteReg.Size = new System.Drawing.Size(60, 24);
+            this.lblWriteReg.Size = new System.Drawing.Size(59, 24);
             this.lblWriteReg.TabIndex = 0;
             this.lblWriteReg.Text = "Register";
             this.lblWriteReg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -247,21 +246,21 @@
             this.lblWriteRegValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblWriteRegValue.Location = new System.Drawing.Point(3, 24);
             this.lblWriteRegValue.Name = "lblWriteRegValue";
-            this.lblWriteRegValue.Size = new System.Drawing.Size(60, 24);
+            this.lblWriteRegValue.Size = new System.Drawing.Size(59, 24);
             this.lblWriteRegValue.TabIndex = 1;
             this.lblWriteRegValue.Text = "Value";
             this.lblWriteRegValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbWriteRegAddr
             // 
-            this.tbWriteRegAddr.Location = new System.Drawing.Point(97, 3);
+            this.tbWriteRegAddr.Location = new System.Drawing.Point(95, 3);
             this.tbWriteRegAddr.Name = "tbWriteRegAddr";
             this.tbWriteRegAddr.Size = new System.Drawing.Size(100, 20);
             this.tbWriteRegAddr.TabIndex = 2;
             // 
             // tbWriteRegValue
             // 
-            this.tbWriteRegValue.Location = new System.Drawing.Point(97, 27);
+            this.tbWriteRegValue.Location = new System.Drawing.Point(95, 27);
             this.tbWriteRegValue.Name = "tbWriteRegValue";
             this.tbWriteRegValue.Size = new System.Drawing.Size(100, 20);
             this.tbWriteRegValue.TabIndex = 3;
@@ -270,9 +269,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(69, 0);
+            this.label3.Location = new System.Drawing.Point(68, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(22, 24);
+            this.label3.Size = new System.Drawing.Size(21, 24);
             this.label3.TabIndex = 4;
             this.label3.Text = "0x";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -281,9 +280,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(69, 24);
+            this.label4.Location = new System.Drawing.Point(68, 24);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(22, 24);
+            this.label4.Size = new System.Drawing.Size(21, 24);
             this.label4.TabIndex = 5;
             this.label4.Text = "0x";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -292,7 +291,6 @@
             // 
             this.groupBox1.Controls.Add(this.cmbJob);
             this.groupBox1.Controls.Add(this.btnStop);
-            this.groupBox1.Controls.Add(this.btnDrawLine);
             this.groupBox1.Controls.Add(this.btnBatchWriteClear);
             this.groupBox1.Controls.Add(this.btnBatchWriteStartStop);
             this.groupBox1.Controls.Add(this.lbBatchWriteHistory);
@@ -305,25 +303,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Batch Write";
             // 
+            // cmbJob
+            // 
+            this.cmbJob.FormattingEnabled = true;
+            this.cmbJob.Location = new System.Drawing.Point(7, 223);
+            this.cmbJob.Name = "cmbJob";
+            this.cmbJob.Size = new System.Drawing.Size(166, 21);
+            this.cmbJob.TabIndex = 7;
+            // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(179, 252);
+            this.btnStop.Location = new System.Drawing.Point(88, 250);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 6;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.BtnStop_Click);
-            // 
-            // btnDrawLine
-            // 
-            this.btnDrawLine.Location = new System.Drawing.Point(6, 252);
-            this.btnDrawLine.Name = "btnDrawLine";
-            this.btnDrawLine.Size = new System.Drawing.Size(75, 23);
-            this.btnDrawLine.TabIndex = 5;
-            this.btnDrawLine.Text = "Line";
-            this.btnDrawLine.UseVisualStyleBackColor = true;
-            this.btnDrawLine.Click += new System.EventHandler(this.BtnDrawLine_Click);
             // 
             // btnBatchWriteClear
             // 
@@ -337,7 +333,7 @@
             // 
             // btnBatchWriteStartStop
             // 
-            this.btnBatchWriteStartStop.Location = new System.Drawing.Point(98, 252);
+            this.btnBatchWriteStartStop.Location = new System.Drawing.Point(7, 250);
             this.btnBatchWriteStartStop.Name = "btnBatchWriteStartStop";
             this.btnBatchWriteStartStop.Size = new System.Drawing.Size(75, 23);
             this.btnBatchWriteStartStop.TabIndex = 3;
@@ -391,14 +387,6 @@
             this.cmbSerialPort.Name = "cmbSerialPort";
             this.cmbSerialPort.Size = new System.Drawing.Size(121, 21);
             this.cmbSerialPort.TabIndex = 5;
-            // 
-            // cmbJob
-            // 
-            this.cmbJob.FormattingEnabled = true;
-            this.cmbJob.Location = new System.Drawing.Point(7, 223);
-            this.cmbJob.Name = "cmbJob";
-            this.cmbJob.Size = new System.Drawing.Size(121, 21);
-            this.cmbJob.TabIndex = 7;
             // 
             // FormMain
             // 
@@ -456,7 +444,6 @@
         private System.Windows.Forms.Button btnBatchWriteBrowse;
         private System.Windows.Forms.TextBox tbBatchWriteFileName;
         private System.Windows.Forms.Timer timerGeneral;
-        private System.Windows.Forms.Button btnDrawLine;
         private System.Windows.Forms.Label lblSerialPort;
         private System.Windows.Forms.ComboBox cmbSerialPort;
         private System.Windows.Forms.Button btnStop;

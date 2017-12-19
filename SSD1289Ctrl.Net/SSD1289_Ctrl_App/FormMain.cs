@@ -56,8 +56,9 @@ namespace SSD1289_Ctrl_App
             btnReadReg.Enabled = enableControls;
             btnWriteReg.Enabled = enableControls;
             btnBatchWriteStartStop.Enabled = enableControls;
-            btnDrawLine.Enabled = enableControls;
+            btnStop.Enabled = enableControls;
             btnValueCalc.Enabled = enableControls;
+            btnBatchWriteBrowse.Enabled = enableControls;
             cmbJob.Enabled = enableControls;
         }
 
@@ -75,7 +76,6 @@ namespace SSD1289_Ctrl_App
             tbWriteRegValue.Enabled = enableControls;
             btnWriteReg.Enabled = enableControls;
             btnBatchWriteStartStop.Enabled = enableControls;
-            btnDrawLine.Enabled = enableControls;
             btnOpenClose.Enabled = enableControls;
         }
 
@@ -86,7 +86,6 @@ namespace SSD1289_Ctrl_App
             tbWriteRegValue.Enabled = enableControls;
             btnWriteReg.Enabled = enableControls;
             btnBatchWriteStartStop.Enabled = enableControls;
-            btnDrawLine.Enabled = enableControls;
             btnOpenClose.Enabled = enableControls;
         }
 
@@ -269,6 +268,15 @@ namespace SSD1289_Ctrl_App
             }
             );
         }
+
+        private void PopulateJobs()
+        {
+            cmbJob.Items.Add(AppJob.BatchWrite);
+            cmbJob.Items.Add(AppJob.FillWhite);
+            cmbJob.Items.Add(AppJob.Line);
+            cmbJob.Items.Add(AppJob.MarkCorner);
+            cmbJob.Items.Add(AppJob.Character);
+        }
         #endregion Private Methods
 
         #region Event Handlers
@@ -291,16 +299,7 @@ namespace SSD1289_Ctrl_App
 
             _registerTemplates = AppUtil.LoadRegister<SSD1289Register>("ssd1289.json");
         }
-
-        private void PopulateJobs()
-        {
-            cmbJob.Items.Add(AppJob.BatchWrite);
-            cmbJob.Items.Add(AppJob.FillWhite);
-            cmbJob.Items.Add(AppJob.Line);
-            cmbJob.Items.Add(AppJob.MarkCorner);
-            cmbJob.Items.Add(AppJob.Character);
-        }
-
+        
         // The window is about to be closed.
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -455,32 +454,6 @@ namespace SSD1289_Ctrl_App
             return false;
         }
 
-        // DrawLine button clicked.
-        private async void BtnDrawLine_Click(object sender, EventArgs e)
-        {
-            btnDrawLine.Enabled = false;
-            UpdateUiWhileManyRegsWriting(false);
-
-            // Register values for a diagonal line.
-            //_rvPairs = Ssd1289Util.CreateLineWithBlack();
-
-            // Register values for clearing the LCD with white color.
-            // (It will take long time(a minute or so).
-            //_rvPairs = Ssd1289Util.CreateBackgroudWithWhite();
-            _rvPairs = AppUtil.CreateBackgroudWithColor(_colors[_colorIndex++]);
-            if (_colorIndex >= _colors.Length)
-            {
-                _colorIndex = 0;
-            }
-            _loopWriteRegisters = true;
-
-            await DoBatchWrite();
-            _rvPairs.Clear();
-
-            btnDrawLine.Enabled = true;
-            UpdateUiWhileManyRegsWriting(true);
-        }
-
         // Batch-write-history button clicked.
         private void BtnBatchWriteClear_Click(object sender, EventArgs e)
         {
@@ -525,14 +498,39 @@ namespace SSD1289_Ctrl_App
             }
             else
             {
+                bool addressAvailable = false;
+                bool dataAvailable = false;
+
                 if (UInt32.TryParse(tbWriteRegAddr.Text, NumberStyles.HexNumber, null, out UInt32 addr))
                 {
-                    frmValueCalc = new FormValueCalc(addr);
+                    addressAvailable = true;
                 }
                 else
                 {
-                    MessageBox.Show("Invalid address.");
+                    MessageBox.Show("Address should be hexadeciaml number.");
                     return;
+                }
+
+                if (UInt32.TryParse(tbWriteRegValue.Text, NumberStyles.HexNumber, null, out UInt32 value))
+                {
+                    dataAvailable = true;
+                }
+                else
+                {
+                    MessageBox.Show("Value should be hexadeciaml number.");
+                    return;
+                }
+
+                if (addressAvailable == true)
+                {
+                    if (dataAvailable == true)
+                    {
+                        frmValueCalc = new FormValueCalc(addr, value);
+                    }
+                    else
+                    {
+                        frmValueCalc = new FormValueCalc(addr);
+                    }
                 }
             }
              

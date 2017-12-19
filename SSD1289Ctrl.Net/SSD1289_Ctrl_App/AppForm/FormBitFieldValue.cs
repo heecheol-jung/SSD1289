@@ -138,15 +138,19 @@ namespace SSD1289_Ctrl_App.AppForm
 
         private void BtnOk_Click(object sender, EventArgs e)
         {
-            SetValue();
-            DialogResult = DialogResult.OK;
+            if (SetValue())
+            {
+                DialogResult = DialogResult.OK;
+            }
         }
 
         private void BtnOkContinue_Click(object sender, EventArgs e)
         {
-            SetValue();
-            _continue = true;
-            DialogResult = DialogResult.OK;
+            if (SetValue())
+            {
+                _continue = true;
+                DialogResult = DialogResult.OK;
+            }
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)

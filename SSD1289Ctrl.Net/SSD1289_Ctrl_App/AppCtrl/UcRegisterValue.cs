@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using SSD1289.Net;
 using SSD1289_Ctrl_App.AppForm;
@@ -63,6 +64,12 @@ namespace SSD1289_Ctrl_App.AppCtrl
             set
             {
                 _registerValue = value;
+                if (_addressSet)
+                {
+                    SSD1289Register reg = (SSD1289Register)cmbAddress.SelectedItem;
+                    reg.Value = _registerValue;
+                    UpdateRegisterTemplateInfo();
+                }
             }
         }
         public bool HasValue
@@ -118,7 +125,18 @@ namespace SSD1289_Ctrl_App.AppCtrl
             {
                 dgvBitField.DataSource = _bitFieldBindingSource;
             }
-            
+
+            if (regTemplate.Value.HasValue)
+            {
+                List<SSD1289BitField> bitFields = SSD1289BitField.CreateBitFieldsFromValue(regTemplate, regTemplate.Value.Value);
+                if (bitFields?.Count > 0)
+                {
+                    foreach (SSD1289BitField item in bitFields)
+                    {
+                        _bitFieldBindingSource.Add(item);
+                    }
+                }
+            }
         }
 
         private void DisableAddressSelectoin()
@@ -135,6 +153,20 @@ namespace SSD1289_Ctrl_App.AppCtrl
                     }
                 }
             }
+        }
+
+        private void UpdateRegisterValueAndUi()
+        {
+            // Sort by Offset.
+            _bitFields.Sort(delegate (SSD1289BitField x, SSD1289BitField y)
+            {
+                if (x.Offset == y.Offset) return 0;
+                else if (x.Offset > y.Offset) return 1;
+                else return -1;
+            });
+            
+            _registerValue = SSD1289BitField.CalculateValueFromBitFields(_bitFields);
+            tbValue.Text = string.Format($"{_registerValue:X4}");
         }
         #endregion Private Methods
 
@@ -166,9 +198,8 @@ namespace SSD1289_Ctrl_App.AppCtrl
                 if (frmBfValue.ShowDialog() == DialogResult.OK)
                 {
                     _bitFieldBindingSource.Add(frmBfValue.BitField);
-
-                    _registerValue = SSD1289BitField.CalculateValueFromBitFields(_bitFields);
-                    tbValue.Text = string.Format($"{_registerValue:X4}");
+                                        
+                    UpdateRegisterValueAndUi();
                 }
             } while (frmBfValue.Continue);
         }
@@ -196,8 +227,7 @@ namespace SSD1289_Ctrl_App.AppCtrl
                         bitField.Value = frmBfValue.BitField.Value;
                         _bitFieldBindingSource.ResetCurrentItem();
 
-                        _registerValue = SSD1289BitField.CalculateValueFromBitFields(_bitFields);
-                        tbValue.Text = string.Format($"{_registerValue:X4}");
+                        UpdateRegisterValueAndUi();
                     }
                 }
             }
@@ -220,6 +250,8 @@ namespace SSD1289_Ctrl_App.AppCtrl
             }
 
             _bitFieldBindingSource.RemoveAt(selectedIdx);
+
+            UpdateRegisterValueAndUi();
         }
 
         private void DgvBitField_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -236,11 +268,11 @@ namespace SSD1289_Ctrl_App.AppCtrl
 
         private void BtnManualInput_Click(object sender, EventArgs e)
         {
-            _bitFieldBindingSource.Clear();
-
             FormManualRegValue frmValue = new FormManualRegValue();
             if (frmValue.ShowDialog() == DialogResult.OK)
             {
+                _bitFieldBindingSource.Clear();
+
                 List<SSD1289BitField> bitFields = SSD1289BitField.CreateBitFieldsFromValue((SSD1289Register)cmbAddress.SelectedItem, frmValue.RegisterValue);
                 if (bitFields?.Count > 0)
                 {
@@ -249,8 +281,7 @@ namespace SSD1289_Ctrl_App.AppCtrl
                         _bitFieldBindingSource.Add(item);
                     }
 
-                    _registerValue = SSD1289BitField.CalculateValueFromBitFields(_bitFields);
-                    tbValue.Text = string.Format($"{_registerValue:X4}");
+                    UpdateRegisterValueAndUi();
                 }
             }
             
