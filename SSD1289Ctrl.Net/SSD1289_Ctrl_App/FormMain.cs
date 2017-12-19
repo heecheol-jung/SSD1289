@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.Threading;
 using SSD1289_Ctrl_App.SSD1289;
+using SSD1289.Net;
+using SSD1289_Ctrl_App.AppForm;
 
 namespace SSD1289_Ctrl_App
 {
@@ -21,6 +23,9 @@ namespace SSD1289_Ctrl_App
         bool _isWriteStarted = false;
         List<string> _registerWriteHistory = new List<string>();
         object _lock1 = new object();
+        ushort[] _colors = new ushort[] { 0xFFFF, 0x001F, 0xF800, 0x07E0 };
+        byte _colorIndex = 0;
+        List<SSD1289Register> _registerTemplates = null;
         #endregion
 
         #region Constructors
@@ -51,7 +56,10 @@ namespace SSD1289_Ctrl_App
             btnReadReg.Enabled = enableControls;
             btnWriteReg.Enabled = enableControls;
             btnBatchWriteStartStop.Enabled = enableControls;
-            btnDrawLine.Enabled = enableControls;
+            btnStop.Enabled = enableControls;
+            btnValueCalc.Enabled = enableControls;
+            btnBatchWriteBrowse.Enabled = enableControls;
+            cmbJob.Enabled = enableControls;
         }
 
         private void UpdateControlsWhileRegReading()
@@ -68,7 +76,6 @@ namespace SSD1289_Ctrl_App
             tbWriteRegValue.Enabled = enableControls;
             btnWriteReg.Enabled = enableControls;
             btnBatchWriteStartStop.Enabled = enableControls;
-            btnDrawLine.Enabled = enableControls;
             btnOpenClose.Enabled = enableControls;
         }
 
@@ -79,7 +86,6 @@ namespace SSD1289_Ctrl_App
             tbWriteRegValue.Enabled = enableControls;
             btnWriteReg.Enabled = enableControls;
             btnBatchWriteStartStop.Enabled = enableControls;
-            btnDrawLine.Enabled = enableControls;
             btnOpenClose.Enabled = enableControls;
         }
 
@@ -262,6 +268,15 @@ namespace SSD1289_Ctrl_App
             }
             );
         }
+
+        private void PopulateJobs()
+        {
+            cmbJob.Items.Add(AppJob.BatchWrite);
+            cmbJob.Items.Add(AppJob.FillWhite);
+            cmbJob.Items.Add(AppJob.Line);
+            cmbJob.Items.Add(AppJob.MarkCorner);
+            cmbJob.Items.Add(AppJob.Character);
+        }
         #endregion Private Methods
 
         #region Event Handlers
@@ -275,15 +290,22 @@ namespace SSD1289_Ctrl_App
                 cmbSerialPort.Items.AddRange(portNames);
                 cmbSerialPort.SelectedIndex = 0;
             }
+
+            PopulateJobs();
             
             UpdateControls();
 
             timerGeneral.Enabled = true;
-        }
 
+            _registerTemplates = AppUtil.LoadRegister<SSD1289Register>("ssd1289.json");
+        }
+        
         // The window is about to be closed.
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
+            _loopWriteRegisters = false;
+
+            Thread.Sleep(100);
             SerialClose();
 
             timerGeneral.Enabled = false;
@@ -348,7 +370,7 @@ namespace SSD1289_Ctrl_App
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            openFileDialog1.InitialDirectory = "c:\\";
+            //openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
@@ -369,17 +391,11 @@ namespace SSD1289_Ctrl_App
 
             if (_serial.IsOpen == true)
             {
-                // ssd1289_init_reg_value.txt : SSD1289 initialization register values.
-                if (!string.IsNullOrEmpty(tbBatchWriteFileName.Text))
+                if (PrepareBatchWriteData())
                 {
-                    _rvPairs = Ssd1289Util.LoadRegisterValue(tbBatchWriteFileName.Text);
                     _loopWriteRegisters = true;
-
                     await DoBatchWrite();
-                }
-                else
-                {
-                    MessageBox.Show("Select register value file name.");
+                    _rvPairs.Clear();
                 }
             }
 
@@ -387,24 +403,55 @@ namespace SSD1289_Ctrl_App
             UpdateUiWhileManyRegsWriting(true);
         }
 
-        // DrawLine button clicked.
-        private async void BtnDrawLine_Click(object sender, EventArgs e)
+        private bool PrepareBatchWriteData()
         {
-            btnDrawLine.Enabled = false;
-            UpdateUiWhileManyRegsWriting(false);
+            if (cmbJob.SelectedIndex < 0)
+            {
+                MessageBox.Show("No job selected.");
+                return false;
+            }
 
-            // Register values for a diagonal line.
-            _rvPairs = Ssd1289Util.CreateLineWithBlack();
+            switch ((AppJob)cmbJob.SelectedItem)
+            {
+                case AppJob.BatchWrite:
+                    // ssd1289_init_reg_value.txt : SSD1289 initialization register values.
+                    if (!string.IsNullOrEmpty(tbBatchWriteFileName.Text))
+                    {
+                        _rvPairs = AppUtil.LoadRegisterValue(tbBatchWriteFileName.Text);
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Select register value file name.");
+                    }
+                    break;
 
-            // Register values for clearing the LCD with white color.
-            // (It will take long time(a minute or so).
-            //_rvPairs = Ssd1289Util.CreateBackgroudWithWhite();
-            _loopWriteRegisters = true;
+                case AppJob.FillWhite:
+                    _rvPairs = AppUtil.CreateBackgroudWithColor(AppConstant.COLOR_WHITE);
+                    return true;
+                    break;
 
-            await DoBatchWrite();
+                case AppJob.Line:
+                    _rvPairs = AppUtil.CreateLineWithBlack();
+                    return true;
+                    break;
 
-            btnDrawLine.Enabled = true;
-            UpdateUiWhileManyRegsWriting(true);
+                case AppJob.MarkCorner:
+                    _rvPairs = AppUtil.CreateCornerPixels();
+                    return true;
+                    break;
+
+                case AppJob.Character:
+                    _rvPairs = AppUtil.CreateAscii();
+                    return true;
+                    break;
+
+                default:
+                    MessageBox.Show("Invalid job.");
+                    break;
+            }
+            
+            return false;
         }
 
         // Batch-write-history button clicked.
@@ -433,6 +480,68 @@ namespace SSD1289_Ctrl_App
                     lbBatchWriteHistory.Items.Insert(0, message);
                 }
                 lbBatchWriteHistory.EndUpdate();
+            }
+        }
+
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+            _loopWriteRegisters = false;
+        }
+
+        private void BtnValueCalc_Click(object sender, EventArgs e)
+        {
+            FormValueCalc frmValueCalc = null;
+
+            if (string.IsNullOrEmpty(tbWriteRegAddr.Text))
+            {
+                frmValueCalc = new FormValueCalc();
+            }
+            else
+            {
+                bool addressAvailable = false;
+                bool dataAvailable = false;
+
+                if (UInt32.TryParse(tbWriteRegAddr.Text, NumberStyles.HexNumber, null, out UInt32 addr))
+                {
+                    addressAvailable = true;
+                }
+                else
+                {
+                    MessageBox.Show("Address should be hexadeciaml number.");
+                    return;
+                }
+
+                if (UInt32.TryParse(tbWriteRegValue.Text, NumberStyles.HexNumber, null, out UInt32 value))
+                {
+                    dataAvailable = true;
+                }
+                else
+                {
+                    MessageBox.Show("Value should be hexadeciaml number.");
+                    return;
+                }
+
+                if (addressAvailable == true)
+                {
+                    if (dataAvailable == true)
+                    {
+                        frmValueCalc = new FormValueCalc(addr, value);
+                    }
+                    else
+                    {
+                        frmValueCalc = new FormValueCalc(addr);
+                    }
+                }
+            }
+             
+            if (frmValueCalc.ShowDialog() == DialogResult.OK)
+            {
+                if ((string.IsNullOrEmpty(tbWriteRegAddr.Text)) &&
+                    (frmValueCalc.HasAddress))
+                {
+                    tbWriteRegAddr.Text = string.Format($"{frmValueCalc.RegisterAddress:X2}");
+                }
+                tbWriteRegValue.Text = string.Format($"{frmValueCalc.RegisterValue:X4}");
             }
         }
         #endregion

@@ -1,0 +1,1611 @@
+[
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "OSCEN",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": "The oscillator will be turned on when OSCEN = 1, off when OSCEN = 0."
+      }
+    ],
+    "Name": "Oscillator",
+    "Address": 0,
+    "Bits": 16,
+    "Description": "osc"
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "MUX",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "TB",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "SM",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "BGR",
+        "Offset": 11,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "CAD",
+        "Offset": 12,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "REV",
+        "Offset": 13,
+        "Bits": 1,
+        "Description": "Displays all character and graphics display sections with reversal when REV = “1”."
+      },
+      {
+        "Value": 0,
+        "Name": "RL",
+        "Offset": 14,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Driver Output Control",
+    "Address": 1,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "NW",
+        "Offset": 0,
+        "Bits": 8,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "WSMD",
+        "Offset": 8,
+        "Bits": 1
+      },
+      {
+        "Value": 0,
+        "Name": "EOR",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "B/C",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": "Select the liquid crystal drive waveform VCOM."
+      },
+      {
+        "Value": 0,
+        "Name": "ENWS",
+        "Offset": 11,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "FLD",
+        "Offset": 12,
+        "Bits": 1,
+        "Description": "Set display in interlace drive mode to protect from flicker."
+      }
+    ],
+    "Name": "LCD-Driving-Waveform Control",
+    "Address": 2,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "AP",
+        "Offset": 1,
+        "Bits": 3,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "DC",
+        "Offset": 4,
+        "Bits": 4,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "BT",
+        "Offset": 9,
+        "Bits": 3,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "DCT",
+        "Offset": 12,
+        "Bits": 4,
+        "Description": ""
+      }
+    ],
+    "Name": "Power control1",
+    "Address": 3,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "CPG",
+        "Offset": 2,
+        "Bits": 6,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "CPR",
+        "Offset": 10,
+        "Bits": 6,
+        "Description": ""
+      }
+    ],
+    "Name": "Compare register1",
+    "Address": 5,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "CPB",
+        "Offset": 2,
+        "Bits": 6,
+        "Description": ""
+      }
+    ],
+    "Name": "Compare register2",
+    "Address": 6,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "D",
+        "Offset": 0,
+        "Bits": 2,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "CM",
+        "Offset": 3,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "DTE",
+        "Offset": 4,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "GON",
+        "Offset": 5,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "SPT",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VLE",
+        "Offset": 9,
+        "Bits": 2,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PT",
+        "Offset": 11,
+        "Bits": 2,
+        "Description": ""
+      }
+    ],
+    "Name": "Display Control",
+    "Address": 7,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "RTN",
+        "Offset": 0,
+        "Bits": 4,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "SRTN",
+        "Offset": 4,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "SDIV",
+        "Offset": 5,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "DIV",
+        "Offset": 6,
+        "Bits": 2,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "EQ",
+        "Offset": 8,
+        "Bits": 3,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "SDT",
+        "Offset": 12,
+        "Bits": 2,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "NO",
+        "Offset": 14,
+        "Bits": 2,
+        "Description": ""
+      }
+    ],
+    "Name": "Frame Cycle Control",
+    "Address": 11,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VRC",
+        "Offset": 0,
+        "Bits": 3,
+        "Description": ""
+      }
+    ],
+    "Name": "Power Control2",
+    "Address": 12,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VRH",
+        "Offset": 0,
+        "Bits": 4,
+        "Description": ""
+      }
+    ],
+    "Name": "Power Control3",
+    "Address": 13,
+    "Bits": 16,
+    "Description": "An example uses 0x080C."
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VDV",
+        "Offset": 8,
+        "Bits": 5,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VCOMG",
+        "Offset": 13,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Power Control4",
+    "Address": 14,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "SCN",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      }
+    ],
+    "Name": "Gate Scan Position",
+    "Address": 15,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "SLP",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Sleep mode",
+    "Address": 16,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "LG",
+        "Offset": 0,
+        "Bits": 3,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "AM",
+        "Offset": 3,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "ID",
+        "Offset": 4,
+        "Bits": 2,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "TY",
+        "Offset": 6,
+        "Bits": 2,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "DMode",
+        "Offset": 8,
+        "Bits": 2,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VMode",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "OEDef",
+        "Offset": 11,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "TRANS",
+        "Offset": 12,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "DFM",
+        "Offset": 13,
+        "Bits": 2,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VSMode",
+        "Offset": 15,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Entry Mode",
+    "Address": 17,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "INVVS",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "INVHS",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "INVDEN",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "INVDOT",
+        "Offset": 3,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Generic Interface",
+    "Address": 21,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "HBP",
+        "Offset": 0,
+        "Bits": 8,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "XL",
+        "Offset": 8,
+        "Bits": 8,
+        "Description": ""
+      }
+    ],
+    "Name": "Horizontal Porch",
+    "Address": 22,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VBP",
+        "Offset": 0,
+        "Bits": 8,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VFP",
+        "Offset": 8,
+        "Bits": 7,
+        "Description": ""
+      }
+    ],
+    "Name": "Vertical Porch",
+    "Address": 23,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VCM",
+        "Offset": 0,
+        "Bits": 6,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "nOTP",
+        "Offset": 7,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Power Control5",
+    "Address": 30,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "WD",
+        "Offset": 0,
+        "Bits": 18,
+        "Description": "Mapping depends on the interface setting"
+      }
+    ],
+    "Name": "Write Data to GRAM",
+    "Address": 34,
+    "Bits": 18,
+    "Description": ""
+  },
+  {
+    "RW": "Read",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "RD",
+        "Offset": 0,
+        "Bits": 18,
+        "Description": "Mapping depends on the interface setting"
+      }
+    ],
+    "Name": "Read Data from GRAM",
+    "Address": 34,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "WMG",
+        "Offset": 2,
+        "Bits": 6,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "WMR",
+        "Offset": 10,
+        "Bits": 6,
+        "Description": ""
+      }
+    ],
+    "Name": "RAM write data mask1",
+    "Address": 35,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "WMB",
+        "Offset": 2,
+        "Bits": 6,
+        "Description": ""
+      }
+    ],
+    "Name": "RAM write data mask2",
+    "Address": 36,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "OSC",
+        "Offset": 12,
+        "Bits": 4,
+        "Description": ""
+      }
+    ],
+    "Name": "Frame Frequency Control",
+    "Address": 37,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "IB1",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "IB2",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Vcom OTP1",
+    "Address": 40,
+    "Bits": 16,
+    "Description": "Optimize data access speed1"
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "IB6",
+        "Offset": 6,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "IB7",
+        "Offset": 7,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "IB15",
+        "Offset": 15,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Vcom OTP2",
+    "Address": 41,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "PKP00",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP01",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP02",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP10",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP11",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP12",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Gamma Control1",
+    "Address": 48,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "PKP20",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP21",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP22",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP30",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP31",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP32",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Gamma Control2",
+    "Address": 49,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "PKP40",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP41",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP42",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP50",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP51",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKP52",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Gamma Control3",
+    "Address": 50,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "PRP00",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PRP01",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PRP02",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PRP10",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PRP11",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PRP12",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Gamma Control4",
+    "Address": 51,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "PKN00",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN01",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN02",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN10",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN11",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN12",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Gamma Control5",
+    "Address": 52,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "PKN20",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN21",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN22",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN30",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN31",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN32",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Gamma Control6",
+    "Address": 53,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "PKN40",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN41",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN42",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN50",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN51",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PKN52",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Gamma Control7",
+    "Address": 54,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "PRN00",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PRN01",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PRN02",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PRN10",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PRN11",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "PRN12",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Gamma Control8",
+    "Address": 55,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VRP00",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRP01",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRP02",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRP03",
+        "Offset": 3,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRP10",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRP11",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRP12",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRP13",
+        "Offset": 11,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRP14",
+        "Offset": 12,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Gamma Control9",
+    "Address": 58,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VRN00",
+        "Offset": 0,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRN01",
+        "Offset": 1,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRN02",
+        "Offset": 2,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRN03",
+        "Offset": 3,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRN10",
+        "Offset": 8,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRN11",
+        "Offset": 9,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRN12",
+        "Offset": 10,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRN13",
+        "Offset": 11,
+        "Bits": 1,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "VRN14",
+        "Offset": 12,
+        "Bits": 1,
+        "Description": ""
+      }
+    ],
+    "Name": "Gamma Control10",
+    "Address": 59,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VL1",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      }
+    ],
+    "Name": "Vertical Scroll Control1",
+    "Address": 65,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VL2",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      }
+    ],
+    "Name": "Vertical Scroll Control2",
+    "Address": 66,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "HSA",
+        "Offset": 0,
+        "Bits": 8,
+        "Description": ""
+      },
+      {
+        "Value": 0,
+        "Name": "HEA",
+        "Offset": 8,
+        "Bits": 8,
+        "Description": ""
+      }
+    ],
+    "Name": "Horizontal RAM address position",
+    "Address": 68,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VSA",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      }
+    ],
+    "Name": "Vertical RAM address position1",
+    "Address": 69,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "VEA",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      }
+    ],
+    "Name": "Vertical RAM address position2",
+    "Address": 70,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "SS1",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      }
+    ],
+    "Name": "First Screen driving position1",
+    "Address": 72,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "SE1",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      }
+    ],
+    "Name": "First Screen driving position2",
+    "Address": 73,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "SS2",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      }
+    ],
+    "Name": "Second Screen driving position1",
+    "Address": 74,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "SE2",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      }
+    ],
+    "Name": "Second Screen driving position2",
+    "Address": 75,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "XAD",
+        "Offset": 0,
+        "Bits": 8,
+        "Description": ""
+      }
+    ],
+    "Name": "RAM address1",
+    "Address": 78,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "YAD",
+        "Offset": 0,
+        "Bits": 9,
+        "Description": ""
+      }
+    ],
+    "Name": "RAM address2",
+    "Address": 79,
+    "Bits": 16,
+    "Description": ""
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "IB",
+        "Offset": 0,
+        "Bits": 16,
+        "Description": ""
+      }
+    ],
+    "Name": "Optimize Access Speed3",
+    "Address": 18,
+    "Bits": 16,
+    "Description": "Fixed value : 0x6CEB"
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "IB",
+        "Offset": 0,
+        "Bits": 16,
+        "Description": ""
+      }
+    ],
+    "Name": "Optimize Access Speed1",
+    "Address": 40,
+    "Bits": 16,
+    "Description": "Fixed value : 0x000A"
+  },
+  {
+    "RW": "Write",
+    "DC": "Command",
+    "Value": 0,
+    "BitFields": [
+      {
+        "Value": 0,
+        "Name": "IB",
+        "Offset": 0,
+        "Bits": 16,
+        "Description": ""
+      }
+    ],
+    "Name": "Optimize Access Speed2",
+    "Address": 47,
+    "Bits": 16,
+    "Description": "Fixed value : 0x0006"
+  }
+]

@@ -15,3 +15,12 @@
 /WaveshareOpen407Z/TrueSTUDIO/WaveshareOpen407Z/Debug
 /SSD1289Ctrl.Net/SSD1289_Ctrl_App/obj
 /SSD1289Ctrl.Net/SSD1289_Ctrl_App/bin
+/BitFieldImplementation_src/BitFieldImplementation/obj/Debug
+/SSD1289Ctrl.Net/SSD1289.NetUnitTest/bin/Debug
+/SSD1289Ctrl.Net/SSD1289.NetUnitTest/obj/Debug
+/SSD1289Ctrl.Net/SSD1289.Net/bin
+/SSD1289Ctrl.Net/SSD1289.Net/obj
+/SSD1289Ctrl.Net/SSD1289.NetUnitTest/obj
+/SSD1289Ctrl.Net/SSD1289.NetUnitTest/bin
+*.suo
+/BitFieldImplementation_src/BitFieldImplementation/.vs/BitFieldImplementation/v15/Server/sqlite3

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +49,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConstant.cs" />
+    <Compile Include="AppCtrl\UcRegisterValue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AppCtrl\UcRegisterValue.Designer.cs">
+      <DependentUpon>UcRegisterValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppForm\FormBitFieldValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppForm\FormBitFieldValue.Designer.cs">
+      <DependentUpon>FormBitFieldValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppForm\FormManualRegValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppForm\FormManualRegValue.Designer.cs">
+      <DependentUpon>FormManualRegValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppForm\FormValueCalc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppForm\FormValueCalc.Designer.cs">
+      <DependentUpon>FormValueCalc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppUtility\AppFont.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,8 +82,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SSD1289\SSD1289Constant.cs" />
-    <Compile Include="SSD1289\Ssd1289Util.cs" />
+    <Compile Include="AppUtility\SSD1289Constant.cs" />
+    <Compile Include="AppUtility\AppUtil.cs" />
+    <EmbeddedResource Include="AppCtrl\UcRegisterValue.resx">
+      <DependentUpon>UcRegisterValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppForm\FormBitFieldValue.resx">
+      <DependentUpon>FormBitFieldValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppForm\FormManualRegValue.resx">
+      <DependentUpon>FormManualRegValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppForm\FormValueCalc.resx">
+      <DependentUpon>FormValueCalc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -68,6 +108,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -77,11 +118,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="ssd1289.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SSD1289.Net\SSD1289.Net.csproj">
+      <Project>{7439a530-215b-4eec-b3bc-d99368afc254}</Project>
+      <Name>SSD1289.Net</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="ssd1289_init_reg_value.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
